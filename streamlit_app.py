@@ -45,4 +45,9 @@ streamlit.header("The fruit load list contains:")
 #streamlit.text("Hello from Snowflake:")
 streamlit.dataframe(my_data_row)
 
+#New Section to add fruit
+#streamlit.header('')
+new_fruit = streamlit.text_input('What Fruit would you like to add?')
+streamlit.write('The user entered', new_fruit)
+
 
