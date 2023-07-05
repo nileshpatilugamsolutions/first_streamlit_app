@@ -1,6 +1,8 @@
 import streamlit
 import pandas
+import requests
 import snowflake.connector
+from urllib.error import URLERROR
 
 streamlit.title('My Parents New Healthy Diner')
 
@@ -25,7 +27,6 @@ streamlit.header('Fruityvice Fruit Advice!')
 fruit_choice = streamlit.text_input('What fruit would you like information about?', 'Kiwi')
 streamlit.write('The user entered', fruit_choice)
 
-import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
 
 #fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
@@ -36,18 +37,18 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output it to the screen as a table
 streamlit.dataframe(fruityvice_normalized)
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-#my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("select * from fruit_load_list")
-my_data_row = my_cur.fetchall()
-streamlit.header("The fruit load list contains:")
-#streamlit.text("Hello from Snowflake:")
-streamlit.dataframe(my_data_row)
+#my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+#my_cur = my_cnx.cursor()
+##my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+#my_cur.execute("select * from fruit_load_list")
+#my_data_row = my_cur.fetchall()
+#streamlit.header("The fruit load list contains:")
+##streamlit.text("Hello from Snowflake:")
+#streamlit.dataframe(my_data_row)
 
 #New Section to add fruit
-#streamlit.header('')
-new_fruit = streamlit.text_input('What Fruit would you like to add?')
-streamlit.write('The user entered', new_fruit)
+##streamlit.header('')
+#new_fruit = streamlit.text_input('What Fruit would you like to add?')
+#streamlit.write('The user entered', new_fruit)
 
 
